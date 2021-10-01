@@ -217,7 +217,7 @@ public class PacienteService {
         return paciente;
     }
     
-    public String delPaciente(int id) throws ClassNotFoundException{
+    public String idPaciente(int id) throws ClassNotFoundException{
          
         ConexionBD conexion = new ConexionBD();
         
