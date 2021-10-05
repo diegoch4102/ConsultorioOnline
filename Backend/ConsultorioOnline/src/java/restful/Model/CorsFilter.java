@@ -57,41 +57,41 @@ public class CorsFilter implements Filter{
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         
-//        if (!StringUtils.isEmpty(allowOrigin)) {
-//            if(allowOrigin.equals("*")){
-//                response.setHeader("Access-Control-Allow-Origin", allowOrigin);
-//            }else{
-//                List<String> allowOriginList = Arrays.asList(allowOrigin.split(","));
-//                if (allowOriginList != null && allowOriginList.size() > 0) {
-//                    String currentOrigin = request.getHeader("Origin");
-//                    if (allowOriginList.contains(currentOrigin)) {
-//                        response.setHeader("Access-Control-Allow-Origin", currentOrigin);
-//                    }
-//                }
-//            }
-//        }
-//        if (!StringUtils.isEmpty(allowMethods)) {
-//            response.setHeader("Access-Control-Allow-Methods", allowMethods);
-//        }
-//        if (!StringUtils.isEmpty(allowCredentials)) {
-//            response.setHeader("Access-Control-Allow-Credentials", allowCredentials);
-//        }
-//        if (!StringUtils.isEmpty(allowHeaders)) {
-//            response.setHeader("Access-Control-Allow-Headers", allowHeaders);
-//        }
-//        if (!StringUtils.isEmpty(exposeHeaders)) {
-//            response.setHeader("Access-Control-Expose-Headers", exposeHeaders);
-//        }
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, HEAD, OPTIONS");
-        response.setHeader("Access-Control-Allow-Headers", "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-        response.setHeader("Access-Control-Expose-Headers", exposeHeaders);
-        
-        response.setStatus(HttpServletResponse.SC_OK);
-         
-        filterChain.doFilter(servletRequest, response);
-        
+        if (!StringUtils.isEmpty(allowOrigin)) {
+            if(allowOrigin.equals("*")){
+                response.setHeader("Access-Control-Allow-Origin", allowOrigin);
+            }else{
+                List<String> allowOriginList = Arrays.asList(allowOrigin.split(","));
+                if (allowOriginList != null && allowOriginList.size() > 0) {
+                    String currentOrigin = request.getHeader("Origin");
+                    if (allowOriginList.contains(currentOrigin)) {
+                        response.setHeader("Access-Control-Allow-Origin", currentOrigin);
+                    }
+                }
+            }
+        }
+        if (!StringUtils.isEmpty(allowMethods)) {
+            response.setHeader("Access-Control-Allow-Methods", allowMethods);
+        }
+        if (!StringUtils.isEmpty(allowCredentials)) {
+            response.setHeader("Access-Control-Allow-Credentials", allowCredentials);
+        }
+        if (!StringUtils.isEmpty(allowHeaders)) {
+            response.setHeader("Access-Control-Allow-Headers", allowHeaders);
+        }
+        if (!StringUtils.isEmpty(exposeHeaders)) {
+            response.setHeader("Access-Control-Expose-Headers", exposeHeaders);
+        }
+//        response.setHeader("Access-Control-Allow-Origin", "*");
+//        response.setHeader("Access-Control-Allow-Credentials", "true");
+//        response.setHeader("Access-Control-Allow-Methods", "POST, GET, HEAD, OPTIONS");
+//        response.setHeader("Access-Control-Allow-Headers", "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+//        response.setHeader("Access-Control-Expose-Headers", exposeHeaders);
+//        if ("options".equalsIgnoreCase( request.getMethod())) {
+//            response.setStatus(HttpServletResponse.SC_OK);
+//        } 
+//        else {filterChain.doFilter(servletRequest, response);}
+
         filterChain.doFilter(servletRequest, servletResponse);
     }
  
