@@ -30,6 +30,8 @@ import org.apache.commons.lang3.StringUtils;
                 @WebInitParam(name = "allowCredentials", value = "true"),
                 @WebInitParam(name = "allowHeaders", value = "Content-Type,X-Token")})
 
+// Un Servlet Filter es un objeto invocado en el preprocesamiento y 
+// postprocesamiento de una petición.
 public class CorsFilter implements Filter{
 
     private String allowOrigin;
@@ -47,8 +49,9 @@ public class CorsFilter implements Filter{
         exposeHeaders = filterConfig.getInitParameter("exposeHeaders");
     }
  
+      
     @Override
-    public void doFilter(
+    public void doFilter  (
             ServletRequest servletRequest,
             ServletResponse servletResponse, 
             FilterChain filterChain) 
@@ -82,17 +85,24 @@ public class CorsFilter implements Filter{
         if (!StringUtils.isEmpty(exposeHeaders)) {
             response.setHeader("Access-Control-Expose-Headers", exposeHeaders);
         }
+
 //        response.setHeader("Access-Control-Allow-Origin", "*");
 //        response.setHeader("Access-Control-Allow-Credentials", "true");
 //        response.setHeader("Access-Control-Allow-Methods", "POST, GET, HEAD, OPTIONS");
 //        response.setHeader("Access-Control-Allow-Headers", "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+//        response.setHeader("Content-type", "application/json");
 //        response.setHeader("Access-Control-Expose-Headers", exposeHeaders);
 //        if ("options".equalsIgnoreCase( request.getMethod())) {
-//            response.setStatus(HttpServletResponse.SC_OK);
+//            System.out.println("Status antes : " + response.getStatus());
+//            response.setStatus(200);
+//            System.out.println("Status puesto en : " + response.getStatus());
 //        } 
-//        else {filterChain.doFilter(servletRequest, response);}
+//        else  {filterChain.doFilter(servletRequest, response);}
 
-        filterChain.doFilter(servletRequest, servletResponse);
+        
+        System.out.println("request: " + request.toString());
+        System.out.println("response: " + response.getStatus() );
+        filterChain.doFilter(request, response);
     }
  
     @Override
